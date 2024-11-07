@@ -8,20 +8,21 @@ function getComputerChoice() {
         : "scissors";
 }
 
-function getHumanChoice(choicePrompt = "What is your choice?") {
-    let humanChoice = prompt(choicePrompt);
+function getHumanChoice() {
+    let humanChoice = prompt("What is your choice?");
     humanChoice = humanChoice.toLowerCase();
 
     if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
         return humanChoice;
     } else {
-        return "Invalid choice, try again.";
+        console.log("Invalid choice, try again.");
+        return "";
     }
 }
 
 function playRound(humanChoice, computerChoice) {
-    console.log(humanChoice);
-    console.log(computerChoice);
+    console.log("User choice: " + humanChoice);
+    console.log("Computer choice: " + computerChoice);
     if (humanChoice === computerChoice) {
         console.log("It's a tie! Replay this round.");
     } else if (
@@ -38,7 +39,24 @@ function playRound(humanChoice, computerChoice) {
     return (humanScore + computerScore);
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame() {
+    let roundNumber = 0;
+    while (roundNumber < 5) {
+        let computerSelection = getComputerChoice();
+        let humanSelection = "";
+        while (humanSelection === "") {
+            humanSelection = getHumanChoice();
+        }
+        console.log(`Round ${(roundNumber + 1)}!`);
+        playRound(humanSelection, computerSelection);
+        roundNumber = humanScore + computerScore;
+    }
+    if (humanScore > computerScore) {
+        console.log(`You won the game with a score of ${humanScore} to ${computerScore}!`);
+    } else {
+        console.log(`The computer won the game with a score of ${computerScore} to ${humanScore}!`);
+    }
+    return;
+}
 
-playRound(humanSelection, computerSelection);
+playGame();
