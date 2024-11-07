@@ -6,3 +6,16 @@ function getComputerChoice() {
 }
 
 console.log(getComputerChoice());
+
+function getHumanChoice(choicePrompt = "What is your choice?") {
+    let humanChoice = prompt(choicePrompt);
+    humanChoice = humanChoice.toLowerCase();
+
+    if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
+        return humanChoice;
+    } else {
+        return "Invalid choice, try again.";
+    }
+}
+
+console.log(getHumanChoice());
