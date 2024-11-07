@@ -35,8 +35,7 @@ function playRound(humanChoice, computerChoice) {
         console.log("Computer wins this round!")
         computerScore += 1;
     }
-    console.log(humanScore + computerScore);
-    return (humanScore + computerScore);
+    return;
 }
 
 function playGame() {
