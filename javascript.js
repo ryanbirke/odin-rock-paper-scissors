@@ -1,6 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
 let roundNumber = 1;
+let roundWinner = "";
 
 function getComputerChoice() {
     let randomNumber = Math.random()
@@ -26,6 +27,7 @@ function playRound(humanChoice, computerChoice) {
     console.log("Computer choice: " + computerChoice);
     if (humanChoice === computerChoice) {
         console.log("It's a tie! Replay this round.");
+        return "Tie";
     } else if (
         (humanChoice === "rock" && computerChoice == "scissors") ||
         (humanChoice === "paper" && computerChoice == "rock") ||
@@ -33,12 +35,13 @@ function playRound(humanChoice, computerChoice) {
         console.log("You win this round!")
         humanScore += 1;
         roundNumber += 1;
+        return "Human";
     } else {
         console.log("Computer wins this round!")
         computerScore += 1;
         roundNumber += 1;
+        return "Computer";
     }
-    return;
 }
 
 function playGame() {
@@ -66,10 +69,17 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
         const humanSelection = button.id;
         const computerSelection = getComputerChoice();
+        const round = document.querySelector(".roundNum");
+        const score = document.querySelector(".score");
+        const result = document.querySelector(".result");
 
-        playRound(humanSelection, computerSelection);
-
-        let round = document.querySelector(".roundNum")
-        round.textContent = `Round ${roundNumber}`
+        if (humanScore === 5 || computerScore === 5) {
+            let gameWinner = (humanScore === 5) ? "Human" : "Computer"
+            result.textContent = `Result: The ${gameWinner} won!`
+        } else {
+            roundWinner = playRound(humanSelection, computerSelection);
+            round.textContent = `Round ${roundNumber}`
+            score.textContent = `Score: Human - ${humanScore}, Computer - ${computerScore}`            
+        }
     });   
 });
