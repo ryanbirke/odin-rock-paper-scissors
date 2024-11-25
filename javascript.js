@@ -1,6 +1,6 @@
 let humanScore = 0;
 let computerScore = 0;
-let roundNumber = 0;
+let roundNumber = 1;
 
 function getComputerChoice() {
     let randomNumber = Math.random()
@@ -32,9 +32,11 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === "scissors" && computerChoice == "paper")) {
         console.log("You win this round!")
         humanScore += 1;
+        roundNumber += 1;
     } else {
         console.log("Computer wins this round!")
         computerScore += 1;
+        roundNumber += 1;
     }
     return;
 }
@@ -66,7 +68,8 @@ buttons.forEach((button) => {
         const computerSelection = getComputerChoice();
 
         playRound(humanSelection, computerSelection);
-        roundNumber = humanScore + computerScore;
 
+        let round = document.querySelector(".roundNum")
+        round.textContent = `Round ${roundNumber}`
     });   
 });
