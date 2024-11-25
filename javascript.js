@@ -1,5 +1,6 @@
 let humanScore = 0;
 let computerScore = 0;
+let roundNumber = 0;
 
 function getComputerChoice() {
     let randomNumber = Math.random()
@@ -39,7 +40,6 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function playGame() {
-    let roundNumber = 0;
     while (roundNumber < 5) {
         let computerSelection = getComputerChoice();
         let humanSelection = "";
@@ -62,8 +62,11 @@ const buttons = document.querySelectorAll("button");
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        alert(button.id)
-    });
-});
+        const humanSelection = button.id;
+        const computerSelection = getComputerChoice();
 
-playGame();
+        playRound(humanSelection, computerSelection);
+        roundNumber = humanScore + computerScore;
+
+    });   
+});
